@@ -1,11 +1,19 @@
 const express = require('express');
+const { create } = require('express-handlebars');
 const { port } = require('./config/config');
 
 const app = express();
+const hbs = create({
+    extname: ".hbs",
+});
+
+// Handlebars engine
+app.engine('.hbs', hbs.engine);
+app.set('view engine', 'hbs');
+app.set('views', './views');
 
 app.get('/', (req, res) => {
-    res.statusCode = 200;
-    res.send('Hola mundo');
+    res.render('home');
 });
 
 app.listen(port, () => {
