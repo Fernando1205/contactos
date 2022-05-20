@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="createContact" tabindex="-1" aria-labelledby="createContactLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createContactLabel">Crear nuevo contacto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" id="formContact">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre" id="name" name="name">
+                        <label>
+                            <i class="fa-solid fa-user"></i>
+                            Nombre
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" placeholder="Apellidos" id="lastname" name="lastname">
+                        <label>
+                            <i class="fa-solid fa-user"></i>
+                            Apellidos
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" placeholder="Correo" id="email" name="email">
+                        <label>
+                            <i class="fa-solid fa-envelope"></i>
+                            Correo
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control" placeholder="Teléfono" id="phone" name="phone">
+                        <label>
+                            <i class="fa-solid fa-phone"></i>
+                            Teléfono
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <input type="submit" class="btn btn-primary" form="formContact" value="Guardar">
+            </div>
+        </div>
+    </div>
+</div>

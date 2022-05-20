@@ -1,4 +1,13 @@
+body {
+  background-color: #f9fafc;
+  position: relative; }
+
+.text-prim {
+  color: #262626 !important; }
+
+.navbar-bg,
+.footer-bg {
+  background-color: #ebeef3; }
+
 h1 {
-    color: red;
-    font-size: 10em;
-}
+  color: #262626; }

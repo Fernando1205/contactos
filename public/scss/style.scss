@@ -1,4 +1,20 @@
+@import 'variables.scss';
+// Globales
+body {
+    background-color: $fourth;
+    position: relative;
+}
+
+.text-prim {
+    color: $black!important;
+}
+
+// navbar
+.navbar-bg,
+.footer-bg {
+    background-color: $third;
+}
+
 h1 {
-    color: red;
-    size: 10em;
+    color: $black;
 }
