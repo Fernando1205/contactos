@@ -5,6 +5,7 @@ const { port } = require('./config/config');
 const app = express();
 const hbs = create({
     extname: ".hbs",
+    partialsDir: __dirname + '/views/partials/'
 });
 
 // Handlebars engine
