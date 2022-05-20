@@ -1,6 +1,7 @@
 const express = require('express');
 const { create } = require('express-handlebars');
 const { port } = require('./config/config');
+const router = require('./routes/contact');
 
 const app = express();
 const hbs = create({
@@ -16,9 +17,7 @@ app.set('views', './views');
 // Middleware
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+app.use('/', require('./routes/contact'));
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port} 🚀`);
