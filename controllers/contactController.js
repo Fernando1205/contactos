@@ -11,6 +11,16 @@ const home = async(req, res) => {
     }
 }
 
+const list = async(req, res) => {
+    try {
+        let contacts = await Contact.find();
+        res.status(200).send(contacts);
+    } catch (error) {
+        console.log(error);
+        res.status(404).send(error);
+    }
+}
+
 const store = async(req, res) => {
     try {
         const contact = Contact(req.body);
@@ -26,18 +36,21 @@ const store = async(req, res) => {
     }
 }
 
-const list = async(req, res) => {
+const update = async(req, res) => {
     try {
-        let contacts = await Contact.find();
-        res.status(200).send(contacts);
+        console.log(req.params);
+        let { id } = req.params;
+        await Contact.findByIdAndUpdate(id, req.body);
+        res.status(200).send({ message: 'Actualizado correctamente' });
     } catch (error) {
         console.log(error);
-        res.status(404).send(error);
+        res.status(400).send(error);
     }
 }
 
 module.exports = {
     home,
     store,
-    list
+    list,
+    update
 }
