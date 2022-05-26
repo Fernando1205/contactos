@@ -25,7 +25,6 @@ const store = async(req, res) => {
     try {
         const contact = Contact(req.body);
         await contact.save();
-        console.log('guardado');
         res.status(201).send({
             success: true,
             message: 'Registro guardado exitosamente'
@@ -38,7 +37,6 @@ const store = async(req, res) => {
 
 const update = async(req, res) => {
     try {
-        console.log(req.params);
         let { id } = req.params;
         await Contact.findByIdAndUpdate(id, req.body);
         res.status(200).send({ message: 'Actualizado correctamente' });

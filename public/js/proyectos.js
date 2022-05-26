@@ -85,28 +85,32 @@ btnSubmit.addEventListener('click', (e) => {
                 phone: inpPhone.value
             })
         })
-        .then((response) => {
-            if (response.status === 201) {
-                return response.json();
-            } else {
-                warningAlert();
-                throw new Error('Ocurrio un error');
-            }
-        })
+        .then(response => response.json())
         .then((data) => {
-            successAlert(data.message);
-            resetModal();
-            modal.modal('hide');
-            table.ajax.reload(null, false);
+            if (data.success === true) {
+                successAlert(data.message);
+                resetModal();
+                modal.modal('hide');
+                table.ajax.reload(null, false);
+            } else {
+                inputErrors(data.errors)
+            }
         })
         .catch((e) => console.log(e))
 })
 
 function resetModal() {
+    // Vacia los input
     document.querySelector('#name').value = "";
     document.querySelector('#lastname').value = "";
     document.querySelector('#email').value = "";
     document.querySelector('#phone').value = "";
+
+    // Vacia clase de error
+    document.querySelector('#name').classList.remove('is-invalid');
+    document.querySelector('#lastname').classList.remove('is-invalid');
+    document.querySelector('#email').classList.remove('is-invalid');
+    document.querySelector('#phone').classList.remove('is-invalid');
 }
 
 // Muestra los datos a editar en el modal
@@ -128,7 +132,7 @@ $('#custom-table tbody').on('click', '.editBtn', function() {
     btnUpdate.dataset._id = _id;
 });
 
-// Funcion para guardar contacto
+// Funcion para actualizar contacto
 $('body').on('click', '#btnUpdate', (e) => {
 
     e.preventDefault();
@@ -196,6 +200,14 @@ $('#custom-table tbody').on('click', '.deleteBtn', function() {
         }
     })
 })
+
+// Funcion mostrar errores inputs vacios
+function inputErrors(data) {
+    console.log(data);
+    for (const error in data) {
+        document.querySelector(`#${error}`).classList.add('is-invalid');
+    }
+}
 
 // SWEETALERTS
 function successAlert(msg) {
