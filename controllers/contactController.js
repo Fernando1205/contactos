@@ -48,9 +48,21 @@ const update = async(req, res) => {
     }
 }
 
+const destroy = async(req, res) => {
+    try {
+        const { id } = req.params;
+        await Contact.findByIdAndDelete(id);
+        res.status(200).send({ message: 'Eliminado correctamente' });
+    } catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+    }
+}
+
 module.exports = {
     home,
     store,
     list,
-    update
+    update,
+    destroy
 }
