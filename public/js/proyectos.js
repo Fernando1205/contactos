@@ -41,7 +41,7 @@ var table = $('#custom-table').DataTable({
             render: function(data, type, row, meta) {
                 return type === 'display' ?
                     `<button class="btn btn-outline-dark btn-sm editBtn"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btn btn-outline-dark btn-sm"><i class="fa-solid fa-trash"></i></button>` :
+                    <button class="btn btn-outline-dark btn-sm deleteBtn"><i class="fa-solid fa-trash"></i></button>` :
                     data;
             }
         }
@@ -161,6 +161,40 @@ $('body').on('click', '#btnUpdate', (e) => {
             table.ajax.reload(null, false);
         })
         .catch((e) => console.log(e))
+})
+
+// Función para eliminar contacto
+$('#custom-table tbody').on('click', '.deleteBtn', function() {
+    var data = table.row($(this).parents('tr')).data();
+    let _id = data._id;
+    Swal.fire({
+        title: `¿Esta seguro de eliminar el contacto ${data.name}?`,
+        text: "Esta acción no podrá ser revertida",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, eliminar!',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            fetch(`http://127.0.0.1:3001/${_id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    Swal.fire('¡Eliminado!', data.message, 'success');
+                    table.ajax.reload(null, false);
+                })
+                .catch(e => console.log(e));
+        }
+    })
 })
 
 // SWEETALERTS
