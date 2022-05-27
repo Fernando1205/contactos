@@ -38,22 +38,26 @@ const store = async(req, res) => {
 const update = async(req, res) => {
     try {
         let { id } = req.params;
+        const contact = await Contact.findById(id);
+        if (!contact) throw new Error('El contacto no existe');
         await Contact.findByIdAndUpdate(id, req.body);
         res.status(200).send({ message: 'Actualizado correctamente' });
-    } catch (error) {
-        console.log(error);
-        res.status(400).send(error);
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({ message: err.message });
     }
 }
 
 const destroy = async(req, res) => {
     try {
         const { id } = req.params;
+        const contact = await Contact.findById(id);
+        if (!contact) throw new Error('El contacto no existe');
         await Contact.findByIdAndDelete(id);
         res.status(200).send({ message: 'Eliminado correctamente' });
     } catch (err) {
         console.log(err);
-        res.status(400).send(err);
+        res.status(400).send({ message: err.message });
     }
 }
 
