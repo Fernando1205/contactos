@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Contact = require("../models/Contact");
 
+const { validationResult } = require('express-validator');
+
 const home = async(req, res) => {
     try {
         let contacts = await Contact.find().lean();
@@ -22,6 +24,13 @@ const list = async(req, res) => {
 }
 
 const store = async(req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json(errors);
+    }
+
     try {
         const contact = Contact(req.body);
         await contact.save();

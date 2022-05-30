@@ -203,10 +203,13 @@ $('#custom-table tbody').on('click', '.deleteBtn', function() {
 
 // Funcion mostrar errores inputs vacios
 function inputErrors(data) {
-    console.log(data);
-    for (const error in data) {
-        document.querySelector(`#${error}`).classList.add('is-invalid');
-    }
+    // for (const error in data) {
+    //     console.log(error);
+    //     document.querySelector(`#${error}`).classList.add('is-invalid');
+    // }
+    data.forEach(error => {
+        document.querySelector(`#${error.param}`).classList.add('is-invalid');
+    });
 }
 
 // SWEETALERTS
