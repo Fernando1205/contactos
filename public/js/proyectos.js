@@ -150,19 +150,16 @@ $('body').on('click', '#btnUpdate', (e) => {
                 phone: inpPhone.value
             })
         })
-        .then((response) => {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                warningAlert();
-                throw new Error('Ocurrio un error');
-            }
-        })
+        .then(response => response.json())
         .then((data) => {
-            successAlert(data.message);
-            resetModal();
-            modal.modal('hide');
-            table.ajax.reload(null, false);
+            if (data.success === true) {
+                successAlert(data.message);
+                resetModal();
+                modal.modal('hide');
+                table.ajax.reload(null, false);
+            } else {
+                inputErrors(data.errors)
+            }
         })
         .catch((e) => console.log(e))
 })
@@ -203,10 +200,6 @@ $('#custom-table tbody').on('click', '.deleteBtn', function() {
 
 // Funcion mostrar errores inputs vacios
 function inputErrors(data) {
-    // for (const error in data) {
-    //     console.log(error);
-    //     document.querySelector(`#${error}`).classList.add('is-invalid');
-    // }
     data.forEach(error => {
         document.querySelector(`#${error.param}`).classList.add('is-invalid');
     });
