@@ -1,13 +1,21 @@
 body {
-  background-color: #f9fafc;
-  position: relative; }
+  background-color: #ebeef3;
+  position: relative;
+  font-family: 'Comfortaa', cursive; }
 
 .text-prim {
   color: #262626 !important; }
 
 .navbar-bg,
 .footer-bg {
-  background-color: #ebeef3; }
+  background-color: #f9fafc; }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: #262626; }
+
+.shadow-box {
+  box-shadow: 0px 0px 10px 1px #e1e8ef; }

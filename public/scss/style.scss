@@ -1,8 +1,9 @@
 @import 'variables.scss';
 // Globales
 body {
-    background-color: $fourth;
+    background-color: $third;
     position: relative;
+    font-family: 'Comfortaa', cursive;
 }
 
 .text-prim {
@@ -12,9 +13,17 @@ body {
 // navbar
 .navbar-bg,
 .footer-bg {
-    background-color: $third;
+    background-color: $fourth;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     color: $black;
+}
+
+.shadow-box {
+    box-shadow: 0px 0px 10px 1px $secondary;
 }
