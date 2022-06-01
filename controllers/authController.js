@@ -1,7 +1,12 @@
 const register = async(req, res) => {
-    res.render('register');
+    res.render('auth/register');
 };
 
+const login = async(req, res) => {
+    res.render('auth/login');
+}
+
 module.exports = {
-    register
+    register,
+    login
 }

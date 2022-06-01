@@ -1,0 +1,44 @@
+{{#section 'title'}}
+    LOGIN
+{{/section}}
+
+<main class="my-3">
+    <div class="card border-0 shadow-box m-auto" style="max-width: 500px; min-width: 300px;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Login</h4>
+            <form class="form-horizontal pt-3">
+                <div class="mb-3 row">
+                    <label for="email" class="col-sm-3 control-label">Email*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-envelope"></i>
+                            </span>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar email" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="password" class="col-sm-3 control-label">Password*</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Ingrese contraseña" autocomplete="off" required/>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 row mb-0">
+                    <div class="offset-sm-4 col-sm-9">
+                        <button type="submit" class="btn btn-outline-primary rounded-pill px-4 waves-effect waves-light">
+                            <i data-feather="log-in" class="fill-white feather-sm me-2"></i>
+                            Ingresar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
