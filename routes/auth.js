@@ -1,6 +1,7 @@
 const express = require('express');
-const { register, login, registerPost } = require('../controllers/authController');
+const { register, login, registerPost, loginPost } = require('../controllers/authController');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 const { body } = require('express-validator');
 const User = require('../models/User');
@@ -28,5 +29,30 @@ router.post('/register', [
     })
 ], registerPost);
 router.get('/login', login);
+router.post('/login', [
+    body('email', 'El campo email es requerido').notEmpty().isEmail().normalizeEmail().custom(async(value) => {
+
+        const user = await User.findOne({ email: value });
+
+        if (!user) {
+            throw new Error('El email no existe')
+        }
+        return true;
+
+    }),
+    body('password', 'El campo contraseña es requerido').notEmpty().
+    isLength(6).withMessage('La contraseña debe tener minimo 6 caracteres').escape().custom(async(value, { req }) => {
+
+        const user = await User.findOne({ email: req.body.email });
+        const match = await bcrypt.compare(req.body.password, user.password);
+
+        if (!match) {
+            throw new Error('Contraseña incorrecta');
+        }
+
+        return true;
+
+    })
+], loginPost);
 
 module.exports = router;

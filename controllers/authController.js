@@ -34,12 +34,43 @@ const registerPost = async(req, res) => {
         res.status(404).json({ errors: error.message });
     }
 }
+
 const login = async(req, res) => {
     res.render('auth/login');
+}
+
+const loginPost = async(req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(404).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+
+        const user = await User.findOne({ email });
+
+        if (!user) throw new Error('No existe el email');
+
+        if (!await user.comparePassword(password)) throw new Error('Contraseña incorrecta');
+
+        res.status(200).json({
+            success: true,
+            message: 'Login correcto'
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(404).json({ errors: error.message });
+    }
 }
 
 module.exports = {
     register,
     registerPost,
-    login
+    login,
+    loginPost
 }
