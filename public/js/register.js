@@ -76,6 +76,10 @@ function resetForm() {
     inpEmail.value = "";
     inpPass.value = "";
     inpPassConf.value = "";
+
+    inpPass.classList.remove('is-valid');
+    inpPassConf.classList.remove('is-valid');
+
 }
 
 // Checa si son iguales las contraseñas
