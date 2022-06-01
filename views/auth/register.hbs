@@ -16,6 +16,7 @@
                             </span>
                             <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required/>
                         </div>
+                        <div id="nameError" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -27,6 +28,7 @@
                             </span>
                             <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Apellidos" required/>
                         </div>
+                        <div id="lastnameError" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -38,6 +40,7 @@
                             </span>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar email" required/>
                         </div>
+                        <div id="emailError" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -50,6 +53,8 @@
                             <input type="password" class="form-control" name="password" id="password"
                                 placeholder="Ingrese contraseña" autocomplete="off" required/>
                         </div>
+                        <div id="passwordError" class="invalid-feedback"></div>
+                        <small id="passwordHelp" class="form-text text-muted">Minimo 6 caracteres.</small>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -66,7 +71,7 @@
                 </div>
                 <div class="mb-3 row mb-0">
                     <div class="offset-sm-4 col-sm-9">
-                        <button type="submit" class="btn btn-outline-primary rounded-pill px-4 waves-effect waves-light">
+                        <button type="submit" id="btnRegister" class="btn btn-outline-primary rounded-pill px-4 waves-effect waves-light" disabled>
                             <i data-feather="log-in" class="fill-white feather-sm me-2"></i>
                             Registrarse
                         </button>
@@ -76,3 +81,7 @@
         </div>
     </div>
 </main>
+
+{{#section 'script'}}
+    <script src="../js/register.js"></script>
+{{/section}}

@@ -152,7 +152,7 @@ $('body').on('click', '#btnUpdate', (e) => {
         })
         .then(response => response.json())
         .then((data) => {
-            if (data.success === true) {
+            if (data.success) {
                 successAlert(data.message);
                 resetModal();
                 modal.modal('hide');
@@ -204,13 +204,3 @@ function inputErrors(data) {
         document.querySelector(`#${error.param}`).classList.add('is-invalid');
     });
 }
-
-// SWEETALERTS
-function successAlert(msg) {
-    Swal.fire('¡Exito!', msg, 'success')
-}
-
-function warningAlert() {
-    Swal.fire('¡Error!', 'Ha ocurrido un error', 'warning')
-}
-// SWEETALERTS

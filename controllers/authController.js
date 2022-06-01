@@ -15,6 +15,7 @@ const registerPost = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
+    const { email } = req.body;
     try {
 
         const user = await User.findOne({ email });
