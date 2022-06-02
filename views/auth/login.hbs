@@ -16,6 +16,7 @@
                             </span>
                             <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar email" required/>
                         </div>
+                        <div id="emailError" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -28,11 +29,12 @@
                             <input type="password" class="form-control" name="password" id="password"
                                 placeholder="Ingrese contraseña" autocomplete="off" required/>
                         </div>
+                        <div id="passwordError" class="invalid-feedback"></div>
                     </div>
                 </div>
                 <div class="mb-3 row mb-0">
                     <div class="offset-sm-4 col-sm-9">
-                        <button type="submit" class="btn btn-outline-primary rounded-pill px-4 waves-effect waves-light">
+                        <button type="submit" id="btnLogin" class="btn btn-outline-primary rounded-pill px-4 waves-effect waves-light" disabled>
                             <i data-feather="log-in" class="fill-white feather-sm me-2"></i>
                             Ingresar
                         </button>
@@ -42,3 +44,7 @@
         </div>
     </div>
 </main>
+
+{{#section 'script'}}
+    <script src="../js/login.js"></script>
+{{/section}}
