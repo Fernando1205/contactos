@@ -1,5 +1,6 @@
 const btnSubmit = document.querySelector('#btnSubmit');
 const btnUpdate = document.querySelector('#btnUpdate');
+const token = document.querySelector('meta[name="CSRF"]').content;
 
 
 // Inputs de formulario
@@ -76,7 +77,8 @@ btnSubmit.addEventListener('click', (e) => {
     fetch('http://127.0.0.1:3001', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': token
             },
             body: new URLSearchParams({
                 name: inpName.value,
@@ -141,7 +143,8 @@ $('body').on('click', '#btnUpdate', (e) => {
     fetch(`http://127.0.0.1:3001/${_id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': token
             },
             body: new URLSearchParams({
                 name: inpName.value,
@@ -183,7 +186,8 @@ $('#custom-table tbody').on('click', '.deleteBtn', function() {
             fetch(`http://127.0.0.1:3001/${_id}`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRF-TOKEN': token
                     }
                 })
                 .then((response) => {

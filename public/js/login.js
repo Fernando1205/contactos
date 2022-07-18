@@ -1,6 +1,7 @@
 const btnLogin = document.querySelector('#btnLogin');
 const txtEmail = document.querySelector('#email');
 const txtPass = document.querySelector('#password');
+const token = document.querySelector('meta[name="CSRF"]').content;
 
 var emailCheck = false;
 var passCheck = false;
@@ -12,7 +13,8 @@ btnLogin.addEventListener('click', function(e) {
     fetch('http://127.0.0.1:3001/auth/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRF-TOKEN': token
             },
             body: new URLSearchParams({
                 email: txtEmail.value,

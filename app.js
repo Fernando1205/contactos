@@ -5,6 +5,7 @@ const { create } = require('express-handlebars');
 const { port } = require('./config/config');
 const passport = require('passport');
 const session = require('express-session');
+const csrf = require('csurf');
 
 
 const app = express();
@@ -20,6 +21,7 @@ const hbs = create({
     }
 });
 
+// Sesiones
 app.use(session({
     secret: 'pass',
     resave: false,
@@ -27,13 +29,12 @@ app.use(session({
     name: 'secret-name'
 }));
 
+// Passport
 app.use(passport.initialize());
 app.use(passport.session());
-
 passport.serializeUser((user, done) => {
     done(null, { id: user._id, userName: user.name })
 });
-
 passport.deserializeUser((user, done) => {
     return done(null, user);
 });
@@ -46,6 +47,13 @@ app.set('views', './views');
 // Middleware
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+
+// CSRF
+app.use(csrf());
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    next();
+})
 
 app.use('/', require('./routes/contact'));
 app.use('/auth', require('./routes/auth'));
