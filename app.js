@@ -4,6 +4,8 @@ const express = require('express');
 const { create } = require('express-handlebars');
 const { port } = require('./config/config');
 const passport = require('passport');
+const session = require('express-session');
+
 
 const app = express();
 const hbs = create({
@@ -18,10 +20,20 @@ const hbs = create({
     }
 });
 
+app.use(session({
+    secret: 'pass',
+    resave: false,
+    saveUninitialized: false,
+    name: 'secret-name'
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => done(null, { id: user._id, user: userName }));
+passport.serializeUser((user, done) => {
+    done(null, { id: user._id, userName: user.name })
+});
+
 passport.deserializeUser((user, done) => {
     return done(null, user);
 });

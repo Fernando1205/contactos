@@ -57,10 +57,18 @@ const loginPost = async(req, res) => {
 
         if (!await user.comparePassword(password)) throw new Error('Contraseña incorrecta');
 
-        res.status(200).json({
-            success: true,
-            message: 'Login correcto'
-        });
+        // Crea sesion de usuario a traves de passport
+        req.login(user, function(err) {
+            if (err) {
+                console.log(err);
+                throw new Error('Error al crear sesion');
+            }
+            // return res.redirect();
+            res.status(200).json({
+                success: true,
+                message: 'Login correcto'
+            });
+        })
 
     } catch (error) {
         console.log(error);

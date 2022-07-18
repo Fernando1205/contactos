@@ -25,6 +25,7 @@ btnLogin.addEventListener('click', function(e) {
                 console.log(data);
                 document.querySelector(`#emailError`).style.display = 'none';
                 successAlert(data.message);
+                window.location.href = '/';
             } else {
                 showErrors(data.errors);
             }

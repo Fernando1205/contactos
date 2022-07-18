@@ -3,8 +3,9 @@ const { home, store, list, update, destroy } = require('../controllers/contactCo
 const router = express.Router();
 
 const { body } = require('express-validator');
+const verificarUser = require('../middleware/verificarUser');
 
-router.get('/', home);
+router.get('/', verificarUser, home);
 router.get('/list', list);
 
 router.post('/', [
