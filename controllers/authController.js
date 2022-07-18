@@ -76,9 +76,17 @@ const loginPost = async(req, res) => {
     }
 }
 
+const logout = (req, res) => {
+    req.logout((err) => {
+        if (err) return next(err);
+    });
+    return res.redirect('/auth/login');
+}
+
 module.exports = {
     register,
     registerPost,
     login,
-    loginPost
+    loginPost,
+    logout
 }
