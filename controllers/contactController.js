@@ -6,7 +6,7 @@ const { validationResult } = require('express-validator');
 const home = async(req, res) => {
     try {
         let user = req.user;
-        let contacts = await Contact.find().lean();
+        let contacts = await Contact.find({ user: req.user.id }).lean();
         res.render('home', { contacts, user });
     } catch (error) {
         console.log(error);
@@ -16,7 +16,7 @@ const home = async(req, res) => {
 
 const list = async(req, res) => {
     try {
-        let contacts = await Contact.find();
+        let contacts = await Contact.find({ user: req.user.id });
         res.status(200).send(contacts);
     } catch (error) {
         console.log(error);

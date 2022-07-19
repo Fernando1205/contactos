@@ -8,6 +8,7 @@ inpName = document.querySelector('#name');
 inpLastname = document.querySelector('#lastname');
 inpEmail = document.querySelector('#email');
 inpPhone = document.querySelector('#phone');
+inpId = document.querySelector('#id');
 
 // Boton modal crear
 btnCreate = document.querySelector('#modalShow');
@@ -85,7 +86,8 @@ btnSubmit.addEventListener('click', (e) => {
                 name: inpName.value,
                 lastname: inpLastname.value,
                 email: inpEmail.value,
-                phone: inpPhone.value
+                phone: inpPhone.value,
+                user: inpId.value,
             })
         })
         .then(response => response.json())
