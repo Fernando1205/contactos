@@ -27,6 +27,7 @@ btnCreate.addEventListener('click', (e) => {
 
 // Muestra datatable con datos de api
 var table = $('#custom-table').DataTable({
+    responsive: true,
     ajax: {
         "url": "/list",
         "dataSrc": ""
