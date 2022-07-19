@@ -19,6 +19,11 @@ const contactSchema = new Schema({
     phone: {
         type: Number,
         required: true,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
     }
 });
 
