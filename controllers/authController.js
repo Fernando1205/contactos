@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require("../models/User");
+const { nanoid } = require('nanoid');
 
 const { validationResult } = require('express-validator');
 
@@ -15,14 +16,20 @@ const registerPost = async(req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email } = req.body;
+    const { name, lastname, email, password } = req.body;
     try {
 
         const user = await User.findOne({ email });
 
         if (user) throw new Error('El email ya existe');
 
-        const newUser = User(req.body);
+        const newUser = User({
+            name: name,
+            lastname: lastname,
+            email: email,
+            password: password,
+            userToken: nanoid(6)
+        });
         await newUser.save();
 
         res.status(201).json({

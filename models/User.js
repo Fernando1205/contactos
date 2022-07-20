@@ -21,6 +21,15 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         min: 6
+    },
+    userToken: {
+        type: String,
+        default: null,
+
+    },
+    countConfirm: {
+        type: Boolean,
+        default: false
     }
 });
 
