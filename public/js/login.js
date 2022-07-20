@@ -29,7 +29,11 @@ btnLogin.addEventListener('click', function(e) {
                 successAlert(data.message);
                 window.location.href = '/';
             } else {
-                showErrors(data.errors);
+                if (data.errors === 'Cuenta no validad') {
+                    Swal.fire('!Verificar Cuenta!', data.errors, 'warning')
+                } else {
+                    showErrors(data.errors);
+                }
             }
         })
         .catch(error => console.log(error));

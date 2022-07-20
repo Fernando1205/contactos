@@ -23,6 +23,14 @@
 <body>
 
     {{>navbar}}
+
+      {{#each mensajes}}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{this.msg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {{/each}}
+    
     <div class="container">
         {{{body}}}
     </div>

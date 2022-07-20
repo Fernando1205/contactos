@@ -6,6 +6,7 @@ const { port } = require('./config/config');
 const passport = require('passport');
 const session = require('express-session');
 const csrf = require('csurf');
+const flash = require('connect-flash');
 
 
 const app = express();
@@ -28,6 +29,8 @@ app.use(session({
     saveUninitialized: false,
     name: 'secret-name'
 }));
+
+app.use(flash());
 
 // Passport
 app.use(passport.initialize());

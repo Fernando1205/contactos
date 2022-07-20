@@ -1,5 +1,5 @@
 const express = require('express');
-const { register, login, registerPost, loginPost, logout } = require('../controllers/authController');
+const { register, login, registerPost, loginPost, logout, verificarCuenta } = require('../controllers/authController');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
@@ -56,5 +56,7 @@ router.post('/login', [
 ], loginPost);
 
 router.get('/logout', logout);
+
+router.get('/verificarCuenta/:token', verificarCuenta);
 
 module.exports = router;

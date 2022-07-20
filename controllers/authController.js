@@ -5,7 +5,7 @@ const { nanoid } = require('nanoid');
 const { validationResult } = require('express-validator');
 
 const register = async(req, res) => {
-    res.render('auth/register');
+    res.render('auth/register', { mensajes: req.flash('mensajes') });
 };
 
 const registerPost = async(req, res) => {
@@ -43,7 +43,7 @@ const registerPost = async(req, res) => {
 }
 
 const login = async(req, res) => {
-    res.render('auth/login');
+    res.render('auth/login', { mensajes: req.flash('mensajes') });
 }
 
 const loginPost = async(req, res) => {
@@ -61,6 +61,8 @@ const loginPost = async(req, res) => {
         const user = await User.findOne({ email });
 
         if (!user) throw new Error('No existe el email');
+
+        if (user.countConfirm !== true) throw new Error('Cuenta no validad');
 
         if (!await user.comparePassword(password)) throw new Error('Contraseña incorrecta');
 
@@ -90,10 +92,32 @@ const logout = (req, res) => {
     return res.redirect('/auth/login');
 }
 
+const verificarCuenta = async(req, res) => {
+
+    let { token } = req.params
+
+    try {
+        const user = await User.findOne({ userToken: token });
+
+        if (!user) throw new Error('El usuario no se encuentra en nuestros registros');
+
+        await User.findByIdAndUpdate(user._id, { countConfirm: true });
+
+        req.flash('mensajes', { msg: "Cuenta verificada" });
+
+        return res.redirect('/auth/login');
+
+    } catch (error) {
+        req.flash('mensajes', { msg: "Hubo un problema al verificar cuenta, intente mas tarde" });
+        return res.redirect('/auth/register');
+    }
+}
+
 module.exports = {
     register,
     registerPost,
     login,
     loginPost,
-    logout
+    logout,
+    verificarCuenta
 }
