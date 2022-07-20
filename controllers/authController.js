@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const User = require("../models/User");
 const { nanoid } = require('nanoid');
+const nodemailer = require('nodemailer');
+const { mailUser, mailPass } = require('../config/config');
 
 const { validationResult } = require('express-validator');
 
@@ -31,6 +33,25 @@ const registerPost = async(req, res) => {
             userToken: nanoid(6)
         });
         await newUser.save();
+
+        // ENVIO DE EMAIL PARA CONFIRMAR CUENTA
+        const transport = nodemailer.createTransport({
+            host: "smtp.mailtrap.io",
+            port: 2525,
+            auth: {
+                user: mailUser,
+                pass: mailPass
+            }
+        });
+
+        // send mail with defined transport object
+        await transport.sendMail({
+            from: '"Fernando 👻" <fer@example.com>', // sender address
+            to: newUser.email, // list of receivers
+            subject: "Verificar cuenta", // Subject line
+            text: "Verificar cuenta", // plain text body
+            html: `<a href="http://127.0.0.1:3001/auth/verificarCuenta/${newUser.userToken}">Verificar cuenta</a>`
+        });
 
         res.status(201).json({
             success: true,
